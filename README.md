@@ -3,8 +3,6 @@
 # SET UP STEPS
 # SCREENSHOTS
 # PLANNING STORY
-# WIREFRAMES
-![Zoo Wireframe](https://i.imgur.com/DffjpxE.jpg)
 # ERD
 ![Zoo ERD](https://i.imgur.com/eV6ZhLT.jpg)
 # USER STORIES
