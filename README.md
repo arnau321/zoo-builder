@@ -11,7 +11,8 @@ After creating the user stories, the first thing planned was the backend API. Th
 # TECHNOLOGIES USED
 - Javascript
 - jQuery
-- HTML/CSS
-- Bootstrap
+- Mongoose
+- Express
+- MongoDB
 # UNSOLVED PROBLEMS
 Add additional functionality like group by type, size, food type.
