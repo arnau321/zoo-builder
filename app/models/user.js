@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+// create user model
 const userSchema = new mongoose.Schema({
   email: {
     type: String,

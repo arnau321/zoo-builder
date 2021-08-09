@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+// create animal model
 const animalSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -21,6 +21,7 @@ const animalSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  // ownership by user
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

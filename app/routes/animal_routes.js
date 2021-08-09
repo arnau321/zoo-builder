@@ -35,13 +35,17 @@ router.get('/animals', requireToken, (req, res, next) => {
 router.get('/animals/:id', requireToken, (req, res, next) => {
   const id = req.params.id
   Animal.findById(id)
+    // handle error
     .then(handle404)
+    // checks for ownership
     .then(animal => requireOwnership(req, animal))
+    // response about request with status
     .then(animal => res.status(200).json({ animal }))
     .catch(next)
 })
-// create animal
+// create one animal
 router.post('/animals', requireToken, (req, res, next) => {
+  // creates animalData var for use in create
   const animalData = req.body.animal
   animalData.owner = req.user.id
   Animal.create(animalData)
@@ -49,32 +53,44 @@ router.post('/animals', requireToken, (req, res, next) => {
     .catch(next)
 })
 
-// update animal authenticated
+// update one animal authenticated
 router.patch('/animals/:id', requireToken, removeBlanks, (req, res, next) => {
   // If try to change owner property, will delete
   // key/value pair
   delete req.body.animal.owner
+  // create id var for use in findById
   const id = req.params.id
   Animal.findById(id)
+    // handles errors
     .then(handle404)
+    // checks for ownership
     .then(animal => requireOwnership(req, animal))
+    // returns the updated animal
     .then(animal => {
       return animal.updateOne(req.body.animal)
     })
+    // sends verification message
     .then(animal => res.status(200).json({animal}))
+    // move to the next middleware
     .catch(next)
 })
 
 // delete animal only if owned by signed in user
 router.delete('/animals/:id', requireToken, (req, res, next) => {
+  // create id var for use in findById
   const id = req.params.id
+  // finds animal by id
   Animal.findById(id)
+    // handles error
     .then(handle404)
+    // check for ownership and delete animal.
     .then(animal => {
       requireOwnership(req, animal)
       return animal.deleteOne()
     })
+    // send status message
     .then(() => res.sendStatus(204))
+    // move to next middleware
     .catch(next)
 })
 
